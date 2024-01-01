@@ -37,5 +37,9 @@ namespace hp_system {
             //this returns false if condition should be removed from the player
             return true; //this condition will never be removed unless manually by the user
         }
+
+        public override string ToString() {
+            return HPFormula().ToString();
+        }
     }
 }

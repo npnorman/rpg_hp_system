@@ -28,17 +28,42 @@ namespace hp_system
             return hp;
         }
 
-        public ArrayList getConditions() {
+        public ArrayList GetConditions() {
             //will return condtions
             return conditions;
         }
 
         public void AddCondition(Condition condition) {
-            conditions[0] = condition;
+            conditions.Add(condition);
         }
 
-        public void addHP(int hp) {
+        public void RemoveCondition(int index) { 
+            conditions.Remove(index);
+        }
+
+        public void AddHP(int hp) {
             this.hp += hp;
+        }
+
+        public void NextTurn() {
+            //for each condition
+            for (int i = 0; i < conditions.Count; i++) {
+                //add what condition returns
+                if (conditions[i] != null) {
+                    Condition tempCondition = (Condition)conditions[i];
+                    hp += tempCondition.HPFormula();
+                    
+                    //check if still valid and remove if not
+                    if (tempCondition.isValid() == false) {
+                        //remove from list
+                        conditions.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        public override string ToString() {
+            return hp.ToString();
         }
     }
 }
